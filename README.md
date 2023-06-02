@@ -14,13 +14,13 @@ touch Dockerfile
 mkdir src
 ```
 
-## Init NodeJS
+## Initialize Node
 
 ```bash
 npm init -y
 ```
 
-## Install and Configure Webpack
+## Install Webpack and Plugins
 
 ```bash
 npm install webpack webpack-cli webpack-dev-server --save-dev
