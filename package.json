@@ -5,8 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "start-dev": "webpack serve --open --config webpack.dev.js",
+    "build-dev": "webpack --config webpack.dev.js",
+    "build-prod": "webpack --config webpack.prod.js"
   },
   "keywords": [
     "webpack",
@@ -15,9 +16,13 @@
   "author": "ig33kmor3",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "html-webpack-plugin": "^5.5.1",
+    "mini-css-extract-plugin": "^2.7.6",
     "sass-loader": "^13.3.1",
     "style-loader": "^3.3.3",
     "webpack": "^5.85.0",
