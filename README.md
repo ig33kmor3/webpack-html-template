@@ -26,7 +26,6 @@ npm init -y
 npm install webpack webpack-cli webpack-dev-server --save-dev
 npm install style-loader css-loader sass-loader --save-dev
 npm install html-webpack-plugin --save-dev
-npm install css-minimizer-webpack-plugin --save-dev
-npm install mini-css-extract-plugin --save-dev
+npm install mini-css-extract-plugin css-minimizer-webpack-plugin --save-dev
 npm install @babel/core babel-loader @babel/preset-env --save-dev
 ```

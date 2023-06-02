@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: 'development',
@@ -17,6 +18,7 @@ module.exports = {
 
     entry: {
         home: './src/home.js',
+        about: './src/about/about.js',
     },
 
     output: {
@@ -28,8 +30,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(s(a|c)ss)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: ["style-loader", "css-loader", "sass-loader",],
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -43,16 +49,27 @@ module.exports = {
     },
 
     plugins: [
+        new MiniCssExtractPlugin({
+                filename: "[name].[contenthash].css",
+                chunkFilename: "[id].css",
+            }),
         new HtmlWebpackPlugin({
             title: 'Home',
             template: './src/index.html',
             chucks: ['home'],
             inject: "body",
             filename: 'index.html',
+        }),
+        new HtmlWebpackPlugin({
+            title: 'About',
+            template: './src/about/index.html',
+            chucks: ['about'],
+            inject: "body",
+            filename: 'about.html',
         })
     ],
 
     optimization: {
-        runtimeChunk: 'single'
+        runtimeChunk: 'single',
     },
 }
