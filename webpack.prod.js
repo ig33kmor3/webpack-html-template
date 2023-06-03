@@ -6,16 +6,22 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
     mode: 'production',
 
+    performance: {
+        maxAssetSize: 1000000,
+        maxEntrypointSize: 1000000,
+    },
+
     devtool: 'source-map',
 
     entry: {
-        home: './src/home.js',
-        about: './src/about/about.js',
+        home: { import: './src/js/home.js', filename: 'js/home.js' },
+        about: { import: './src/js/about.js', filename: 'js/about.js' },
     },
 
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'images/[name][ext]',
         clean: true
     },
 
@@ -31,10 +37,6 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
             },
             {
@@ -54,13 +56,14 @@ module.exports = {
 
     plugins: [
         new MiniCssExtractPlugin({
-                filename: "[name].[contenthash].css",
+                filename: "css/[name].[contenthash].css",
                 chunkFilename: "[id].css",
             }),
         new HtmlWebpackPlugin({
             title: 'Home',
             template: './src/index.html',
             chucks: ['home'],
+            excludeChunks: ['about'],
             inject: "body",
             filename: 'index.html',
         }),
@@ -68,13 +71,15 @@ module.exports = {
             title: 'About',
             template: './src/about/index.html',
             chucks: ['about'],
+            excludeChunks: ['home'],
             inject: "body",
-            filename: 'about.html',
+            filename: './about/index.html',
         })
     ],
 
     optimization: {
         runtimeChunk: 'single',
+        minimize: true,
         minimizer: [
             new CssMinimizerPlugin(),
         ]

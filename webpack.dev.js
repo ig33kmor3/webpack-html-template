@@ -17,13 +17,14 @@ module.exports = {
     devtool: 'inline-source-map',
 
     entry: {
-        home: './src/home.js',
-        about: './src/about/about.js',
+        home: { import: './src/js/home.js', filename: 'js/home.js' },
+        about: { import: './src/js/about.js', filename: 'js/about.js' },
     },
 
     output: {
         filename: '[name].[contenthash].dev.js',
         path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'images/[name][ext]',
         clean: true
     },
 
@@ -42,21 +43,30 @@ module.exports = {
                 type: 'asset/resource',
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
-            },
+                test: /\.(?:js|mjs|cjs)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['@babel/preset-env', { targets: "defaults" }]
+                        ]
+                    }
+                }
+            }
         ]
     },
 
     plugins: [
         new MiniCssExtractPlugin({
-                filename: "[name].[contenthash].css",
+                filename: "css/[name].[contenthash].css",
                 chunkFilename: "[id].css",
             }),
         new HtmlWebpackPlugin({
             title: 'Home',
             template: './src/index.html',
             chucks: ['home'],
+            excludeChunks: ['about'],
             inject: "body",
             filename: 'index.html',
         }),
@@ -64,8 +74,9 @@ module.exports = {
             title: 'About',
             template: './src/about/index.html',
             chucks: ['about'],
+            excludeChunks: ['home'],
             inject: "body",
-            filename: 'about.html',
+            filename: './about/index.html',
         })
     ],
 

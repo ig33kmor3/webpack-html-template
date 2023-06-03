@@ -1,0 +1,8 @@
+body {
+    background: lightgrey;
+}
+
+.img--small {
+    width: 100px;
+    height: 100px;
+}

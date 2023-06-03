@@ -5,9 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start-dev": "webpack serve --open --config webpack.dev.js",
-    "build-dev": "webpack --config webpack.dev.js",
-    "build-prod": "webpack --config webpack.prod.js"
+    "dev-start-server": "webpack serve --open --config webpack.dev.js",
+    "dev-build": "webpack --config webpack.dev.js",
+    "prod-build": "webpack --config webpack.prod.js"
   },
   "keywords": [
     "webpack",

@@ -29,3 +29,6 @@ npm install html-webpack-plugin --save-dev
 npm install mini-css-extract-plugin css-minimizer-webpack-plugin --save-dev
 npm install @babel/core babel-loader @babel/preset-env --save-dev
 ```
+
+<img src="assets/icon-square-big.svg" alt="Webpack" width="30%">
+ 
